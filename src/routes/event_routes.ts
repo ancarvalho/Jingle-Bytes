@@ -7,6 +7,6 @@ eventRouter.post("/", createEvent);
 eventRouter.get("/", getEvents);
 eventRouter.get("/unique/:eventId", getEventById);
 eventRouter.get("/find", getEventsFiltered);
-eventRouter.delete("/", deleteEvent);
+eventRouter.delete("/:eventId", deleteEvent);
 eventRouter.patch("/", updateEvent);
 export { eventRouter };

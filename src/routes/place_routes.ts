@@ -6,7 +6,7 @@ const placeRouter = Router();
 placeRouter.post("/", createPlace);
 placeRouter.get("/", getPlaces);
 placeRouter.get("/:placeId", getPlaceById);
-placeRouter.delete("/", deletePlace);
+placeRouter.delete("/:placeId", deletePlace);
 placeRouter.patch("/", updatePlace);
 
 export { placeRouter };

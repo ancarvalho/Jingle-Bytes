@@ -11,13 +11,14 @@ datasource db {
 }
 
 model Place {
-  id      String  @id @default(uuid())
-  name    String
-  address String
-  city    String
-  state   String
-  country String
-  Event   Event[]
+  id           String  @id @default(uuid())
+  name         String
+  address      String
+  neighborhood String
+  city         String
+  state        String
+  country      String
+  Event        Event[]
 
   @@unique([name, address, city, state])
   @@map("places")
@@ -28,9 +29,9 @@ model Event {
   name        String
   date        DateTime
   description String?
-  category    Category @relation(fields: [category_id], references: [id])
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
   category_id String
-  place       Place    @relation(fields: [place_id], references: [id])
+  place       Place    @relation(fields: [place_id], references: [id], onDelete: Cascade)
   place_id    String
 
   @@unique([name, date, category_id, place_id])
