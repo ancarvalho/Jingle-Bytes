@@ -2,8 +2,17 @@
 
 
 ### Created With
+- TypeScript
 - Express
 - Prisma
+
+### How To Start
+*needed to create a .env with database url*
+```
+  npm install
+  npx migrate dev
+  npm run dev
+```
 
 
 ### Routes
@@ -23,7 +32,7 @@
 
 *Event*
 - /event - GET - get all events
-- /event/find?categories=List<Uuid>&dates=List<Date>&places=List<Uuid> - GET - 
+- /event/find?categories=List<Uuid>&dates=List<Date>&places=List<Uuid> - GET - filter events by categories (string list separated by comma), dates(list of 2 datas separated by comma MM/DD/YYYY) and places (string list separated by comma)
 - /event/unique/:eventId - GET - get unique event with eventId
 - /event - POST - create an Event (name*, description, date*, categoryId*, placeId*)
 - /event - PATCH - update an Event (name, description, date, categoryId, placeId)
@@ -31,4 +40,4 @@
 
 
 
-(*) all items marked with(*) are required
+(*) all items marked with (*) are required
