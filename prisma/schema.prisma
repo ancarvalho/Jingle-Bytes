@@ -14,10 +14,10 @@ model Place {
   id           String  @id @default(uuid())
   name         String
   address      String
-  neighborhood String
-  city         String
-  state        String
-  country      String
+  neighborhood String?
+  city         String?
+  state        String?
+  country      String?
   Event        Event[]
 
   @@unique([name, address, city, state])
