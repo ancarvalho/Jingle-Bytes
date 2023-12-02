@@ -4,9 +4,9 @@ const placeRouter = Router();
 
 
 placeRouter.post("/", createPlace);
-placeRouter.get("/", getPlaces);
-placeRouter.get("/:placeId", getPlaceById);
-placeRouter.delete("/:placeId", deletePlace);
-placeRouter.patch("/", updatePlace);
+placeRouter.get("/all", getPlaces);
+placeRouter.get("/unique/:place_id", getPlaceById);
+placeRouter.delete("/:place_id", deletePlace);
+placeRouter.patch("/:place_id", updatePlace);
 
 export { placeRouter };

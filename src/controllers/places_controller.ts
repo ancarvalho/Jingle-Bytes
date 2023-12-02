@@ -32,11 +32,11 @@ const getPlaces = async (_req: Request, res: Response) => {
 
 const getPlaceById = async (req: Request, res: Response) => {
   try {
-    const { placeId } = req.params;
+    const { place_id } = req.params;
     const place = await prisma.place.findFirst({
       where: {
         id: {
-          equals: placeId
+          equals: place_id
         }
       }
     })
@@ -50,10 +50,10 @@ const getPlaceById = async (req: Request, res: Response) => {
 
 const deletePlace = async (req: Request, res: Response) => {
   try {
-    const { placeId } = req.params;
+    const { place_id } = req.params;
     await prisma.place.delete({
       where: {
-        id: placeId
+        id: place_id
       }
     })
 
@@ -67,10 +67,11 @@ const updatePlace = async (req: Request, res: Response) => {
 
 
   try {
-    const { id, name, address, city, state, country } = req.body;
+    const { place_id } = req.params;
+    const { name, address, city, state, country } = req.body;
     const place = await prisma.place.update({
       where: {
-        id: id
+        id: place_id
       },
       data: {
         name, address, city, state, country

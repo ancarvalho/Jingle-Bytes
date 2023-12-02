@@ -4,9 +4,9 @@ const eventRouter = Router();
 
 
 eventRouter.post("/", createEvent);
-eventRouter.get("/", getEvents);
-eventRouter.get("/unique/:eventId", getEventById);
+eventRouter.get("/all", getEvents);
+eventRouter.get("/unique/:event_id", getEventById);
 eventRouter.get("/find", getEventsFiltered);
-eventRouter.delete("/:eventId", deleteEvent);
-eventRouter.patch("/", updateEvent);
+eventRouter.delete("/:event_id", deleteEvent);
+eventRouter.patch("/:event_id", updateEvent);
 export { eventRouter };
