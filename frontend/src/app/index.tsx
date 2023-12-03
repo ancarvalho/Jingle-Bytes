@@ -1,6 +1,8 @@
 // import { } from "@headlessui/react"
+import { Link } from "react-router-dom"
 import EventCard from "../components/event_card"
 import { Event } from "../types/event"
+import { routes } from "../utils/routes"
 
 export default function Home() {
 
@@ -25,13 +27,17 @@ export default function Home() {
 			</section>
 
 			<section className="bg-slate-600">
+
+
 				<div className="flex justify-between items-center p-2">
 					<div className="text-xl font-bold dark:text-white">
 						Próximos Eventos
 					</div>
-					<div className="text-md font-medium dark:text-white">
-						ver todos
-					</div>
+					<Link to={routes.events.route} >
+						<div className="text-md font-medium dark:text-white">
+							ver todos
+						</div>
+					</Link>
 				</div>
 
 				<div className="flex flex-wrap justify-center gap-2 p-2">

@@ -1,4 +1,5 @@
 import EventCard from "../../components/event_card"
+import Example from "../../components/filter_search"
 import { Event } from "../../types/event"
 
 const newEvent = {
@@ -15,7 +16,8 @@ export default function Events() {
 
       </div>
 
-      <div className="">
+      <div className="relative w-full h-screen">
+        <Example/>
         <div className="flex flex-wrap justify-center gap-2 p-2">
           <EventCard {...newEvent} />
           <EventCard {...newEvent} />

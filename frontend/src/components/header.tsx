@@ -1,4 +1,10 @@
-const locations = ["Home", "Eventos",]
+// const locations = ["Home", "Eventos",]
+
+import { Link } from "react-router-dom"
+import { routes } from "../utils/routes"
+
+
+
 
 
 export default function HeaderComponent() {
@@ -23,11 +29,14 @@ export default function HeaderComponent() {
           </svg>
           <div className="flex gap-3">
             {
-              locations.map((l) =>
+             Object.values(routes).map((l) =>
               (
-                <div className="dark:text-white">
-                  {l}
-                </div>
+                <Link to={l.route}>
+
+                  <div className="dark:text-white">
+                    {l.name}
+                  </div>
+                </Link>
               )
               )
             }
