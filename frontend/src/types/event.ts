@@ -7,5 +7,7 @@ export type Event = {
   description: string | undefined,
   date: Date,
   category: Category | undefined,
-  place: Place | undefined
+  category_id: string | undefined,
+  place: Place | undefined,
+  place_id: string | undefined,
 }

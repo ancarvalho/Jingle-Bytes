@@ -3,6 +3,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import DatePicker from "tailwind-datepicker-react"
 import { IOptions } from "tailwind-datepicker-react/types/Options"
+import DatePickerComponent from './date_picker_component'
 
 const options: IOptions = {
   autoHide: true,
@@ -68,13 +69,6 @@ const options: IOptions = {
 
 export default function Example() {
 
-  const [show, setShow] = useState<boolean>(false)
-	const handleChange = (selectedDate: Date) => {
-		console.log(selectedDate)
-	}
-	const handleClose = (state: boolean) => {
-		setShow(state)
-	}
   return (
     <div className="fixed bottom-16 left-[88%] pt-2 w-full max-w-sm px-4 z-10">
       <Popover className="relative">
@@ -101,43 +95,54 @@ export default function Example() {
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 bg-slate-200 dark:bg-slate-500">
                   <div className="relative flex flex-col gap-2 p-2">
                     <form>
-                      <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                          <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                          </svg>
+                      <div className="pb-4">
+
+
+                        <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+
+                        <div className="relative">
+                          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <SearchIcon />
+                          </div>
+                          <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
+                          <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
-                        <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
-                        <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                       </div>
                       {/* </form> */}
-                      <div className="flex justify-between">
+                      <div className="pb-4">
+                        <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2" htmlFor="name">
+                          Data
+                        </label>
+                        <div className="flex justify-between items-center ">
+                          <DatePickerComponent classExtend={"w-32"} />
+                          <span className="mx-4 text-gray-500 dark:text-white">ate</span>
+                          <DatePickerComponent classExtend={"w-32"} />
+                        </div>
 
-                        <DatePicker show={show} setShow={(state) => setShow(state)} options={options} classNames="absolute w-32 z-50" />
-                        <span className="mx-4 text-gray-500">to</span>
-                        <DatePicker show={show} setShow={(state) => setShow(state)} options={options} classNames="absolute w-32 z-50" />
-                       </div>
+                      </div>
 
-                      <label htmlFor="categories" className="pt-2 block text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
-                      <select id="categories" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escolha uma categoria</option>
-                        <option value="US">United States</option>
-                        <option value="CA">Canada</option>
-                        <option value="FR">France</option>
-                        <option value="DE">Germany</option>
-                      </select>
+                      <div className="pb-4">
+                        <label htmlFor="categories" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria</label>
+                        <select id="categories" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          <option selected>Escolha uma categoria</option>
+                          <option value="US">United States</option>
+                          <option value="CA">Canada</option>
+                          <option value="FR">France</option>
+                          <option value="DE">Germany</option>
+                        </select>
+                      </div>
+                      <div className="pb-4">
+                        <label htmlFor="places" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Local</label>
+                        <select id="places" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          <option selected>Escolha uma Local</option>
+                          <option value="US">United States</option>
+                          <option value="CA">Canada</option>
+                          <option value="FR">France</option>
+                          <option value="DE">Germany</option>
+                        </select>
+                      </div>
 
-                      <label htmlFor="places" className="pt-2 block text-sm font-medium text-gray-900 dark:text-white">Local</label>
-                      <select id="places" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option selected>Escolha uma Local</option>
-                        <option value="US">United States</option>
-                        <option value="CA">Canada</option>
-                        <option value="FR">France</option>
-                        <option value="DE">Germany</option>
-                      </select>
-
-                      <div  className="flex items-center pt-3 w-full">
+                      <div className="flex items-center pt-3 w-full">
                         {/* <div className="relative">
                           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -146,9 +151,9 @@ export default function Example() {
                           </div>
                           <input name="start" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
                         </div> */}
-                        
-                       
-                       
+
+
+
                         {/* <div className="relative">
                           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -196,3 +201,5 @@ function SearchIcon() {
     </svg>
   )
 }
+
+
