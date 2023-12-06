@@ -1,7 +1,5 @@
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import Home from "./app/index";
-import Events from "./app/events";
 // import React from "react";
 import Layout from "./components/layout";
 import { routes } from "./utils/routes";
@@ -14,7 +12,7 @@ export default function App() {
     <Layout >
       <Routes>
         {/* <Route element={<HeaderComponent />} > */}
-        {Object.values(routes).map((l) => <Route path={l.route} element={l.element()} />)}
+        {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={l.element()} />)}
         {/* <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} /> */}
         {/* <Route path="/login" element={<LoginPage />} /> */}

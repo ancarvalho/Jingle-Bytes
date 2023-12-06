@@ -1,6 +1,6 @@
-import EventCard from "../../components/event_card"
-import Example from "../../components/filter_search"
-import { Event } from "../../types/event"
+import Example from "../../../components/filter_search"
+import ManageEventCard from "../../../components/manage_event_card"
+import { Event } from "../../../types/event"
 
 const newEvent = {
   name: "Tomorrowland 2023",
@@ -9,7 +9,7 @@ const newEvent = {
 } as Event
 
 
-export default function Events() {
+export default function ManageEvents() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-slate-300 dark:bg-slate-700">
       <div className="flex text-start text-2xl font-bold text-black dark:text-white pt-2">
@@ -19,12 +19,10 @@ export default function Events() {
       <div className="">
         <Example/>
         <div className="flex flex-wrap justify-center gap-2 p-2">
-          <EventCard {...newEvent} />
-          <EventCard {...newEvent} />
-          <EventCard {...newEvent} />
-          <EventCard {...newEvent} />
-          {/* <EventCard {...newEvent} /> */}
-
+          <ManageEventCard {...newEvent} />
+          <ManageEventCard {...newEvent} />
+          <ManageEventCard {...newEvent} />
+          <ManageEventCard {...newEvent} />
         </div>
       </div>
 

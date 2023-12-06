@@ -14,8 +14,8 @@ export default function Home() {
 	} as Event
 
 	return (
-		<>
-			<section className="bg-slate-800 py-4">
+		<div className="min-h-screen dark:bg-slate-700 ">
+			<section className="dark:bg-slate-700 ">
 				<div className="relative bg-[url('assets/background.jpg')] bg-no-repeat bg-cover bg-center h-[300px] bg-opacity-90 " >
 					<div className="absolute bottom-0 left-0">
 						<p className="pl-2 text-2xl font-bold bg-opacity-90 bg-slate-700 dark:text-white">
@@ -26,10 +26,10 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="bg-slate-600">
+			<section className="dark:bg-slate-700 pt-6">
 
 
-				<div className="flex justify-between items-center p-2">
+				<div className="flex justify-between items-center py-2 px-8 w-full">
 					<div className="text-xl font-bold dark:text-white">
 						Próximos Eventos
 					</div>
@@ -51,6 +51,6 @@ export default function Home() {
 
 			</section>
 
-		</>
+		</div>
 	)
 }
