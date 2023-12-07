@@ -2,10 +2,12 @@ import express from "express";
 import { categoryRouter } from "./routes/category_routes";
 import { eventRouter } from "./routes/event_routes";
 import { placeRouter } from "./routes/place_routes";
+import cors from "cors"
 
 const app = express();
 const PORT = 42069;
 app.use(express.json());
+app.use(cors())
 
 app.get('/',  (req, res) => {
   res.status(200).json({ "status": "Services UP" })

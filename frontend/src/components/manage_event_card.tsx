@@ -3,11 +3,24 @@ import { Event } from "../types/event"
 import DeleteDialog from "./delete_event_dialog"
 import { CalendarIcon, EditIcon, TrashIcon, WatchIcon } from "../utils/icons"
 import AddOrUpdateDialog from "./add_or_update_event_dialog"
+import { Category } from "../types/category"
+import { Place } from "../types/place"
 
-export default function ManageEventCard(event : Event) {
+
+type AddOrUpdateDialogProps = {
+  event: Event
+  categories: Category[],
+  places: Place[]
+}
+
+
+export default function ManageEventCard({event, categories, places} : AddOrUpdateDialogProps) {
+
+
 
   const [deleteShow, setDeleteShow] = useState(false)
   const [updateShow, setUpdateShow] = useState(false)
+
 
   return (
     <>
@@ -18,7 +31,7 @@ export default function ManageEventCard(event : Event) {
           <button onClick={() => setDeleteShow(true)} className="bg-white dark:bg-black rounded-full bg-opacity-10 dark:bg-opacity-40 p-2">
             <TrashIcon />
           </button>
-          <AddOrUpdateDialog event={event} isOpen={updateShow} setIsOpen={setUpdateShow} />
+          <AddOrUpdateDialog categories={categories} places={places} event={event} isOpen={updateShow} setIsOpen={setUpdateShow} />
           <button onClick={() => setUpdateShow(true)} className="bg-white dark:bg-black rounded-full bg-opacity-10 dark:bg-opacity-40 p-2">
             <EditIcon />
           </button>

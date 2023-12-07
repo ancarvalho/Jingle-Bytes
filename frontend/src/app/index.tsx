@@ -3,15 +3,43 @@ import { Link } from "react-router-dom"
 import EventCard from "../components/event_card"
 import { Event } from "../types/event"
 import { routes } from "../utils/routes"
+import { useEffect, useState } from "react"
+import { httpClient } from "../client/axios"
+import { GenericResponse } from "../types/generic_response"
+import { transformEvents } from "../utils/transform_events"
 
 export default function Home() {
 
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const newEvent = {
-		name: "Tomorrowland 2023",
-		description: "The Biggest Electronic Music Festival",
-		date: new Date("2023/12/20")
-	} as Event
+	const [events, setEvents] = useState<Event[]>([])
+
+
+
+
+
+	useEffect(() => {
+		setIsLoading(true)
+
+		httpClient.get<GenericResponse<Event[]>>("/event/all")
+			.then(({ data }) => {
+				setEvents(transformEvents(data.data))
+				setIsLoading(false)
+			})
+			.catch((e) => console.error(e))
+
+	}, [])
+
+
+
+
+	if (isLoading) {
+		return (
+			<>
+				Loading...
+			</>
+		)
+	}
 
 	return (
 		<div className="min-h-screen dark:bg-slate-700 ">
@@ -41,12 +69,7 @@ export default function Home() {
 				</div>
 
 				<div className="flex flex-wrap justify-center gap-2 p-2">
-					<EventCard {...newEvent} />
-					<EventCard {...newEvent} />
-					<EventCard {...newEvent} />
-					<EventCard {...newEvent} />
-					{/* <EventCard {...newEvent} /> */}
-
+					{events.map((e) => <EventCard key={e.id} {...e} />)}
 				</div>
 
 			</section>

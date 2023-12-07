@@ -5,9 +5,10 @@ import { IOptions } from "tailwind-datepicker-react/types/Options"
 type DatePickerComponentType = {
   classExtend: string | null
   value: Date | undefined
+  onChange: ((date: Date) => void)
 }
 
-export default function DatePickerComponent({classExtend, value}: DatePickerComponentType) {
+export default function DatePickerComponent({classExtend, value, onChange}: DatePickerComponentType) {
 
 
   const [showDate, setShowDate] = useState<boolean>(false)
@@ -40,7 +41,7 @@ export default function DatePickerComponent({classExtend, value}: DatePickerComp
 
   return (
     
-      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} options={options} classNames={`${classExtend}`} />
+      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} onChange={onChange} options={options} classNames={`${classExtend}`} />
     
   )
 }

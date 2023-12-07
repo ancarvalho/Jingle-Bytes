@@ -1,73 +1,29 @@
 import { Popover, Transition } from '@headlessui/react'
 
 import { Fragment, useState } from 'react'
-import DatePicker from "tailwind-datepicker-react"
-import { IOptions } from "tailwind-datepicker-react/types/Options"
-import DatePickerComponent from './date_picker_component'
 
-const options: IOptions = {
-  autoHide: true,
-  todayBtn: true,
-  clearBtn: true,
-  inputDateFormatProp: {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  },
-  theme: {
-    background: "",
-    todayBtn: "",
-    clearBtn: "",
-    icons: "",
-    text: "",
-    disabledText: "",
-    input: "",
-    inputIcon: "",
-    selected: "",
-  },
+import DatePickerComponent from './date_picker_component'
+import { Place } from '../types/place'
+import { Category } from '../types/category'
+
+
+type FilterProps = {
+  search: string | undefined,
+  date: Date | undefined,
+  categoryId: string | undefined,
+  placeId: string | undefined,
 }
 
-// const options : IOptions = {
-// 	title: "Demo Title",
-// 	autoHide: true,
-// 	todayBtn: false,
-// 	clearBtn: true,
-// 	clearBtnText: "Clear",
-// 	maxDate: new Date("2030-01-01"),
-// 	minDate: new Date("1950-01-01"),
-// 	theme: {
-// 		background: "bg-gray-700 dark:bg-gray-800",
-// 		todayBtn: "",
-// 		clearBtn: "",
-// 		icons: "",
-// 		text: "",
-// 		disabledText: "bg-red-500",
-// 		input: "",
-// 		inputIcon: "",
-// 		selected: "",
-// 	},
-// 	icons: {
-// 		// () => ReactElement | JSX.Element
-// 		prev: () => <span>Previous</span>,
-// 		next: () => <span>Next</span>,
-// 	},
-// 	datepickerClassNames: "top-12",
-// 	defaultDate: new Date("2022-01-01"),
-// 	language: "en",
-// 	disabledDates: [],
-// 	weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-// 	inputNameProp: "date",
-// 	inputIdProp: "date",
-// 	inputPlaceholderProp: "Select Date",
-// 	inputDateFormatProp: {
-// 		day: "numeric",
-// 		month: "long",
-// 		year: "numeric"
-// 	}
-// } 
+type FilterSearchProps = {
+  categories: Category[],
+  places: Place[]
+}
 
 
-export default function Example() {
+
+export default function FilterSearch({places, categories }: FilterSearchProps) {
+
+  const [filters, setFilters] = useState<FilterProps>({search: undefined, categoryId: undefined, placeId: undefined, date: undefined} as FilterProps)
 
   return (
     <div className="fixed bottom-16 left-[88%] pt-2 w-full max-w-sm px-4 z-10">
@@ -104,7 +60,7 @@ export default function Example() {
                           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <SearchIcon />
                           </div>
-                          <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
+                          <input type="search" value={filters.search} onChange={(e) => setFilters((f) => { return { ...f, search: e.target.value } as FilterProps })} className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
                           <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
                       </div>
@@ -114,9 +70,9 @@ export default function Example() {
                           Data
                         </label>
                         <div className="flex justify-between items-center ">
-                          <DatePickerComponent classExtend={"w-32"} />
+                          <DatePickerComponent classExtend={"w-32"} value={filters.date} onChange={(date) => setFilters((f) => { return { ...f, date: date } as FilterProps })} />
                           <span className="mx-4 text-gray-500 dark:text-white">ate</span>
-                          <DatePickerComponent classExtend={"w-32"} />
+                          <DatePickerComponent classExtend={"w-32"} value={filters.date} onChange={(date) => setFilters((f) => { return { ...f, date: date } as FilterProps })} />
                         </div>
 
                       </div>
@@ -125,20 +81,14 @@ export default function Example() {
                         <label htmlFor="categories" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria</label>
                         <select id="categories" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                           <option selected>Escolha uma categoria</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
                         </select>
                       </div>
                       <div className="pb-4">
                         <label htmlFor="places" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Local</label>
                         <select id="places" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                           <option selected>Escolha uma Local</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          {places.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
                         </select>
                       </div>
 

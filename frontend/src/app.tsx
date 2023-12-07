@@ -11,10 +11,8 @@ export default function App() {
     // <AuthProvider>
     <Layout >
       <Routes>
-        {/* <Route element={<HeaderComponent />} > */}
         {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={l.element()} />)}
-        {/* <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} /> */}
+
         {/* <Route path="/login" element={<LoginPage />} /> */}
         {/* <Route
           path="/protected"
