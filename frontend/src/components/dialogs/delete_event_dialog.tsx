@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import { httpClient } from '../../client/axios'
 
 type DeleteDialogProps = {
   id: string,
@@ -10,8 +11,8 @@ type DeleteDialogProps = {
 
 export default function DeleteDialog({ id, isOpen, setIsOpen }: DeleteDialogProps) {
 
-  function handle_delete_event(id: string) {
-    console.log(`event ${id} deleted`)
+  async function handle_delete_event(id: string) {
+    await httpClient.delete("/event/" + id)
   }
 
   function closeModal() {

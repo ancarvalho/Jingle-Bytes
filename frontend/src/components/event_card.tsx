@@ -10,7 +10,7 @@ export default function EventCard({ name, description, date }: Event) {
             <div className="flex justify-center text-xl font-bold pt-2 pb-2 dark:text-white">
               {name}
             </div>
-            <div className="flex justify-center text-lg pb-3 dark:text-white">
+            <div className="flex justify-center pb-3 dark:text-white px-2 text-center text-clip text-sm">
               {description}
             </div>
 

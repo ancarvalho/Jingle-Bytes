@@ -1,20 +1,20 @@
 import { useState } from "react"
 import { Event } from "../types/event"
-import DeleteDialog from "./delete_event_dialog"
 import { CalendarIcon, EditIcon, TrashIcon, WatchIcon } from "../utils/icons"
-import AddOrUpdateDialog from "./add_or_update_event_dialog"
 import { Category } from "../types/category"
 import { Place } from "../types/place"
+import DeleteDialog from "./dialogs/delete_event_dialog"
+import AddOrUpdateDialog from "./dialogs/add_or_update_event_dialog"
 
 
-type AddOrUpdateDialogProps = {
+type ManageEventCardProps = {
   event: Event
   categories: Category[],
   places: Place[]
 }
 
 
-export default function ManageEventCard({event, categories, places} : AddOrUpdateDialogProps) {
+export default function ManageEventCard({event, categories, places} : ManageEventCardProps) {
 
 
 
@@ -27,7 +27,7 @@ export default function ManageEventCard({event, categories, places} : AddOrUpdat
 
       <div className="relative dark:bg-slate-800 min-w-[330px] max-w-[360px] min-h-[360px] max-h-[380px] bg-[url('assets/background.jpg')] bg-no-repeat bg-cover bg-center rounded-lg">
         <div className="flex justify-between p-4">
-          <DeleteDialog id={event.id} isOpen={deleteShow} setIsOpen={setDeleteShow} />
+          <DeleteDialog id={event.id!} isOpen={deleteShow} setIsOpen={setDeleteShow} />
           <button onClick={() => setDeleteShow(true)} className="bg-white dark:bg-black rounded-full bg-opacity-10 dark:bg-opacity-40 p-2">
             <TrashIcon />
           </button>
@@ -42,7 +42,7 @@ export default function ManageEventCard({event, categories, places} : AddOrUpdat
             <div className="flex justify-center text-xl font-bold pt-2 pb-2 dark:text-white">
               {event.name}
             </div>
-            <div className="flex justify-center text-lg pb-3 dark:text-white">
+            <div className="flex justify-center pb-3 dark:text-white px-2 text-center text-clip text-sm">
               {event.description}
             </div>
 

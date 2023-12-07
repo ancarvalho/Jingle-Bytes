@@ -2,7 +2,7 @@ import { Category } from "./category"
 import { Place } from "./place"
 
 export type Event = {
-  id: string,
+  id: string | undefined,
   name: string,
   description: string | undefined,
   date: Date,

@@ -4,7 +4,7 @@ import { routes } from "../../utils/routes"
 export default function HeaderComponent() {
   return (
     <>
-      <header className="bg-slate-800 w-full h-20">
+      <header className="min-h-[7vh] bg-slate-800 w-full h-20">
         <nav className="flex justify-between px-2 items-center h-full">
           <LogoSvg />
           <div className="flex gap-3">

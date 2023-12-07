@@ -42,7 +42,7 @@ export default function Home() {
 	}
 
 	return (
-		<div className="min-h-screen dark:bg-slate-700 ">
+		<div className="min-h-[88vh] dark:bg-slate-700 ">
 			<section className="dark:bg-slate-700 ">
 				<div className="relative bg-[url('assets/background.jpg')] bg-no-repeat bg-cover bg-center h-[300px] bg-opacity-90 " >
 					<div className="absolute bottom-0 left-0">

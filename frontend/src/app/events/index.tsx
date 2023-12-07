@@ -44,7 +44,7 @@ export default function Events() {
 
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-slate-300 dark:bg-slate-700">
+    <div className="min-h-[88vh] flex flex-col items-center bg-slate-300 dark:bg-slate-700">
       <div className="flex text-start text-2xl font-bold text-black dark:text-white pt-2">
         Próximos Eventos
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import FilterSearch from "../../../components/filter_search"
 import ManageEventCard from "../../../components/manage_event_card"
 import { Event } from "../../../types/event"
-import AddOrUpdateDialog from "../../../components/add_or_update_event_dialog"
+import AddOrUpdateDialog from "../../../components/dialogs/add_or_update_event_dialog"
 import { httpClient } from "../../../client/axios"
 import { Category } from "../../../types/category"
 import { Place } from "../../../types/place"
@@ -45,7 +45,7 @@ export default function ManageEvents() {
 
   return (
 
-    <div className="min-h-screen flex flex-col items-center bg-slate-300 dark:bg-slate-700">
+    <div className="min-h-[88vh] flex flex-col items-center bg-slate-300 dark:bg-slate-700">
       <AddOrUpdateDialog categories={categories} places={places} isOpen={createEventShow} setIsOpen={setCreateEventShow} event={undefined} />
       <div className="flex justify-between items-center w-full px-8">
 
