@@ -16,6 +16,7 @@ type SearchProps = {
 interface SearchContextType {
 	events: Event[];
 	// filters: FilterProps | undefined;
+	load: () => void
 	setFiltersParams: React.Dispatch<React.SetStateAction<FilterProps | undefined>>;
 	filterEvents: () => void;
 	isLoading: boolean;
@@ -54,8 +55,7 @@ export const SearchContextProvider = ({ children }: SearchProps) => {
 	}
 
 
-
-	useEffect(() => {
+	function load() {
 		if (filters) {
 			// console.log("filtered")
 			filterEvents()
@@ -63,16 +63,19 @@ export const SearchContextProvider = ({ children }: SearchProps) => {
 			getAllEvents()
 			// console.log("notFilterd")
 		}
+	}
 
-	}, [filters])
 
-	console.log(filters)
+	useEffect(load, [filters])
+
+	// console.log(filters)
 
 	return (
 		<SearchContext.Provider
 			value={{
 				// filters,
 				setFiltersParams,
+				load,
 				events,
 				filterEvents,
 				isLoading

@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { httpClient } from '../../client/axios'
+import { useSearch } from '../../contexts/search_global'
 
 type DeleteDialogProps = {
   id: string,
@@ -11,8 +12,12 @@ type DeleteDialogProps = {
 
 export default function DeleteDialog({ id, isOpen, setIsOpen }: DeleteDialogProps) {
 
+  const { load } = useSearch()
+
+
   async function handle_delete_event(id: string) {
     await httpClient.delete("/event/" + id)
+    load()
   }
 
   function closeModal() {

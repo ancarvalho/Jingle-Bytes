@@ -16,7 +16,7 @@ export default function Home() {
 	useEffect(() => {
 		setIsLoading(true)
 
-		httpClient.get<GenericResponse<Event[]>>("/event/all")
+		httpClient.get<GenericResponse<Event[]>>("/event/next")
 			.then(({ data }) => {
 				setEvents(transformEvents(data.data))
 				setIsLoading(false)

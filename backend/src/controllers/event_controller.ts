@@ -33,6 +33,23 @@ const getEvents = async (req: Request, res: Response) => {
   }
 }
 
+const getNextEvents = async (req: Request, res: Response) => {
+  try {
+    const events = await prisma.event.findMany({
+      orderBy: {
+        date: "asc"
+      },
+      take: 4
+    })
+    res.status(200).json({ "status": "Events Listed Successfully", "data": events })
+
+  } catch (error) {
+    res.status(500).json({ "status": "An Error Ocurred On Server", error });
+  }
+}
+
+
+
 
 const getEventsFiltered = async (req: Request, res: Response) => {
   try {
@@ -146,6 +163,6 @@ const updateEvent = async (req: Request, res: Response) => {
 }
 
 
-export { getEvents, getEventById, createEvent, updateEvent, deleteEvent, getEventsFiltered }
+export { getEvents, getEventById, createEvent, updateEvent, deleteEvent, getEventsFiltered, getNextEvents }
 
 

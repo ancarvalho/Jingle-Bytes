@@ -1,6 +1,6 @@
-import Home from "../app/index"
-import Events from "../app/events"
-import ManageEvents from "../app/events/manage"
+import Home from "../pages/index"
+import Events from "../pages/events"
+import ManageEvents from "../pages/events/manage"
 
 export const routes = {
   home: { name: "Home", route: "/", element: () => Home() },
