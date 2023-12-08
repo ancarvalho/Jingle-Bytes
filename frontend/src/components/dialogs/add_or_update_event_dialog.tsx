@@ -5,20 +5,22 @@ import DatePickerComponent from '../date_picker_component'
 import { Category } from '../../types/category'
 import { Place } from '../../types/place'
 import { httpClient } from '../../client/axios'
+import { useGlobal } from '../../contexts/global_context'
 
 type AddOrUpdateDialogProps = {
   event: Event | undefined,
   isOpen: boolean,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-  categories: Category[],
-  places: Place[]
+  // categories: Category[],
+  // places: Place[]
 }
 
 
-export default function AddOrUpdateDialog({ event, isOpen, setIsOpen, categories, places }: AddOrUpdateDialogProps) {
+export default function AddOrUpdateDialog({ event, isOpen, setIsOpen}: AddOrUpdateDialogProps) {
 
 
   const [newEvent, setEvent] = useState<Event>({ ...event } as Event);
+  const {categories, places} = useGlobal()
 
 
   function handle_update_event() {

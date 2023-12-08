@@ -1,20 +1,18 @@
 import { useState } from "react"
 import { Event } from "../types/event"
 import { CalendarIcon, EditIcon, TrashIcon, WatchIcon } from "../utils/icons"
-import { Category } from "../types/category"
-import { Place } from "../types/place"
 import DeleteDialog from "./dialogs/delete_event_dialog"
 import AddOrUpdateDialog from "./dialogs/add_or_update_event_dialog"
 
 
 type ManageEventCardProps = {
   event: Event
-  categories: Category[],
-  places: Place[]
+  // categories: Category[],
+  // places: Place[]
 }
 
 
-export default function ManageEventCard({event, categories, places} : ManageEventCardProps) {
+export default function ManageEventCard({event} : ManageEventCardProps) {
 
 
 
@@ -31,7 +29,7 @@ export default function ManageEventCard({event, categories, places} : ManageEven
           <button onClick={() => setDeleteShow(true)} className="bg-white dark:bg-black rounded-full bg-opacity-10 dark:bg-opacity-40 p-2">
             <TrashIcon />
           </button>
-          <AddOrUpdateDialog categories={categories} places={places} event={event} isOpen={updateShow} setIsOpen={setUpdateShow} />
+          <AddOrUpdateDialog event={event} isOpen={updateShow} setIsOpen={setUpdateShow} />
           <button onClick={() => setUpdateShow(true)} className="bg-white dark:bg-black rounded-full bg-opacity-10 dark:bg-opacity-40 p-2">
             <EditIcon />
           </button>

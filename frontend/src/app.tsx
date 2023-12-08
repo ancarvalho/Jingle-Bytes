@@ -1,20 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-
-// import React from "react";
 import Layout from "./components/layout";
 import { routes } from "./utils/routes";
+
 
 export default function App() {
 
   return (
 
     // <AuthProvider>
-    <Layout >
-      <Routes>
-        {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={l.element()} />)}
-
-        {/* <Route path="/login" element={<LoginPage />} /> */}
-        {/* <Route
+  
+      <Layout >
+        <Routes>
+          {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={l.element()} />)}
+          {/* <Route  path={routes.home.route} element={routes.home.element()} />
+          <Route  path={routes.events.route} element={routes.events.element()} />
+          <Route  path={routes.manage_events.route} element={routes.manage_events.element()} /> */}
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          {/* <Route
           path="/protected"
           element={
             <RequireAuth>
@@ -22,10 +24,11 @@ export default function App() {
             </RequireAuth>
           }
         /> */}
-        {/* </Route> */}
-      </Routes>
-    </Layout>
-    );
+          {/* </Route> */}
+        </Routes>
+      </Layout>
+
+  );
   {/* </AuthProvider> */ }
 
 

@@ -1,4 +1,3 @@
-// import { } from "@headlessui/react"
 import { Link } from "react-router-dom"
 import EventCard from "../components/event_card"
 import { Event } from "../types/event"
@@ -14,10 +13,6 @@ export default function Home() {
 
 	const [events, setEvents] = useState<Event[]>([])
 
-
-
-
-
 	useEffect(() => {
 		setIsLoading(true)
 
@@ -30,16 +25,6 @@ export default function Home() {
 
 	}, [])
 
-
-
-
-	if (isLoading) {
-		return (
-			<>
-				Loading...
-			</>
-		)
-	}
 
 	return (
 		<div className="min-h-[88vh] dark:bg-slate-700 ">
@@ -54,10 +39,10 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="dark:bg-slate-700 pt-6">
+			<section className="bg-slate-100 dark:bg-slate-700 pt-6">
 
 
-				<div className="flex justify-between items-center py-2 px-8 w-full">
+				<div className="flex justify-between items-center py-2 px-8 w-full ">
 					<div className="text-xl font-bold dark:text-white">
 						Próximos Eventos
 					</div>
@@ -68,8 +53,9 @@ export default function Home() {
 					</Link>
 				</div>
 
-				<div className="flex flex-wrap justify-center gap-2 p-2">
-					{events.map((e) => <EventCard key={e.id} {...e} />)}
+				<div className="flex flex-wrap justify-center gap-2 p-2 ">
+					{isLoading ? <>Loading...</> : events.map((e) => <EventCard key={e.id} {...e} />)}
+					{/* {events.map((e) => <EventCard key={e.id} {...e} />)} */}
 				</div>
 
 			</section>

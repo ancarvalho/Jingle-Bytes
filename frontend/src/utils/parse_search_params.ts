@@ -38,7 +38,12 @@ function decodeQueryParams<T extends Object>(value: URLSearchParams) {
   });
 
 
-  return decodedParams as unknown as T;
+  if ( Object.keys(decodedParams).length > 0) {
+    return decodedParams as unknown as T;
+  }
+
+  return undefined
+
 }
 
 
