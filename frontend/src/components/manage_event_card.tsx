@@ -36,7 +36,7 @@ export default function ManageEventCard({event} : ManageEventCardProps) {
         </div>
 
         <div className=" absolute bottom-2 w-full ">
-          <div className="flex flex-col justify-center w-full bg-slate-800">
+          <div className="flex flex-col justify-center w-full bg-slate-200 dark:bg-slate-800">
             <div className="flex justify-center text-xl font-bold pt-2 pb-2 dark:text-white">
               {event.name}
             </div>

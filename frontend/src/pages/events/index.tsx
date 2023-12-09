@@ -1,6 +1,7 @@
 
+import FilterSearch from "../../components/dialogs/filter_search"
 import EventCard from "../../components/event_card"
-import FilterSearch from "../../components/filter_search"
+
 
 import { useSearch } from "../../contexts/search_global"
 
@@ -9,7 +10,7 @@ export default function Events() {
   const {events, isLoading} = useSearch()
 
   return (
-    <div className="min-h-[88vh] flex flex-col items-center bg-slate-100 dark:bg-slate-700">
+    <div className="min-h-[88vh] flex flex-col items-center bg-[rgb(215,215,215)] dark:bg-slate-700">
       <div className="flex text-start text-2xl font-bold text-black dark:text-white pt-2">
         Próximos Eventos
       </div>

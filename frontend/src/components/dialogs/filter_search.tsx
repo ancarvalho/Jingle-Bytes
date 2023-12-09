@@ -1,10 +1,10 @@
 import { Popover, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import DatePickerComponent from './date_picker_component'
-import { FilterProps } from '../types/filter'
-import { useSearch } from '../contexts/search_global'
-import { useGlobal } from '../contexts/global_context'
-import { useQueryParams } from '../contexts/use_query_params'
+import { Fragment, useEffect } from 'react'
+import DatePickerComponent from '../date_picker_component'
+import { FilterProps } from '../../types/filter'
+import { useSearch } from '../../contexts/search_global'
+import { useGlobal } from '../../contexts/global_context'
+import { useQueryParams } from '../../contexts/use_query_params'
 
 
 
@@ -14,15 +14,21 @@ export default function FilterSearch() {
   const [filters, setFilters] = useQueryParams<FilterProps>()
   const { categories, places } = useGlobal()
 
-  console.log(JSON.stringify(filters))
+  // console.log(JSON.stringify(filters))
 
-  setFiltersParams(filters)
-  // function handleSearch(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
-  //   if (filters) {
-  //     setFiltersParams(filters)
-  //   }
-  // }
+  // setFiltersParams(filters)
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (filters) {
+      setFiltersParams(filters)
+    }
+  }
+
+  useEffect(() => {
+    if (filters) {
+      setFiltersParams(filters)
+    }
+  }, [])
 
 
   return (
@@ -51,7 +57,7 @@ export default function FilterSearch() {
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 bg-slate-200 dark:bg-slate-500">
                   <div className="relative flex flex-col gap-2 p-2">
                     <form
-                    // onSubmit={handleSearch}
+                      onSubmit={handleSearch}
                     >
                       <div className="pb-4">
 
@@ -65,7 +71,6 @@ export default function FilterSearch() {
                           <input type="search" value={filters?.search} onChange={(e) => setFilters({ ...filters, search: e.target.value } as FilterProps)} className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
                           <button
                             type="submit"
-                            disabled
                             // onClick={filterEvents}
                             className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                         </div>
@@ -76,9 +81,9 @@ export default function FilterSearch() {
                           Data
                         </label>
                         <div className="flex justify-between items-center ">
-                          <DatePickerComponent classExtend={"w-32"} value={filters?.date ? new Date(filters?.date) : undefined} onChange={(date) => setFilters({ ...filters, date: date.toLocaleDateString() } as FilterProps)} />
+                          <DatePickerComponent classExtend={""} value={filters?.dates ? new Date(filters?.dates) : undefined} onChange={(date) => setFilters({ ...filters, dates: date?.toLocaleDateString() } as FilterProps)} />
                           <span className="mx-4 text-gray-500 dark:text-white">ate</span>
-                          <DatePickerComponent classExtend={"w-32"} value={filters?.date ? new Date(filters?.date) : undefined} onChange={(date) => setFilters({ ...filters, date: date.toLocaleDateString() } as FilterProps)} />
+                          <DatePickerComponent classExtend={""} value={filters?.dates ? new Date(filters?.dates) : undefined} onChange={(date) => setFilters({ ...filters, dates: date?.toLocaleDateString() } as FilterProps)} />
                         </div>
 
                       </div>
@@ -93,7 +98,7 @@ export default function FilterSearch() {
                       <div className="pb-4">
                         <label htmlFor="places" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Local</label>
                         <select id="places" value={filters?.places} onChange={(v) => setFilters({ ...filters, places: v.target.value } as FilterProps)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option value="disabled">Escolha uma Local</option>
+                          <option selected disabled>Escolha uma Local</option>
                           {places.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
                         </select>
                       </div>

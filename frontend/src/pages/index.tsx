@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { httpClient } from "../client/axios"
 import { GenericResponse } from "../types/generic_response"
 import { transformEvents } from "../utils/transform_events"
+import { ArrowRight } from "../utils/icons"
 
 export default function Home() {
 
@@ -27,11 +28,11 @@ export default function Home() {
 
 
 	return (
-		<div className="min-h-[88vh] dark:bg-slate-700 ">
-			<section className="dark:bg-slate-700 ">
+		<div className="min-h-[88vh] dark:bg-slate-700 bg-[rgb(215,215,215)]">
+			<section className="">
 				<div className="relative bg-[url('assets/background.jpg')] bg-no-repeat bg-cover bg-center h-[300px] bg-opacity-90 " >
 					<div className="absolute bottom-0 left-0">
-						<p className="pl-2 text-2xl font-bold bg-opacity-90 bg-slate-700 dark:text-white">
+						<p className="pl-2 text-2xl font-bold dark:bg-opacity-90 bg-opacity-70 bg-slate-300 dark:bg-slate-700 dark:text-white">
 							Os Eventos mais esperados do ano
 						</p>
 					</div>
@@ -39,7 +40,7 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="bg-slate-100 dark:bg-slate-700 pt-6">
+			<section className=" dark:bg-slate-700 bg-[rgb(219,215,215)] pt-6">
 
 
 				<div className="flex justify-between items-center py-2 px-8 w-full ">
@@ -47,8 +48,9 @@ export default function Home() {
 						Próximos Eventos
 					</div>
 					<Link to={routes.events.route} >
-						<div className="text-md font-medium dark:text-white">
+						<div className="flex gap-1 items-center text-md font-medium dark:text-white">
 							ver todos
+							<ArrowRight className="h-5 dark:fill-white fill-black" />
 						</div>
 					</Link>
 				</div>

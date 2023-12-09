@@ -1,8 +1,9 @@
 import { useState } from "react"
-import FilterSearch from "../../../components/filter_search"
+
 import ManageEventCard from "../../../components/manage_event_card"
 import AddOrUpdateDialog from "../../../components/dialogs/add_or_update_event_dialog"
 import { useSearch } from "../../../contexts/search_global"
+import FilterSearch from "../../../components/dialogs/filter_search"
 
 
 export default function ManageEvents() {
@@ -12,7 +13,7 @@ export default function ManageEvents() {
 
   return (
 
-    <div className="min-h-[88vh] flex flex-col items-center bg-slate-100 dark:bg-slate-700">
+    <div className="min-h-[88vh] flex flex-col items-center bg-[rgb(215,215,215)] dark:bg-slate-700">
       <AddOrUpdateDialog isOpen={showEventCreateDialog} setIsOpen={setShowEventCreateDialog} event={undefined} />
       <div className="flex justify-between items-center w-full px-8">
 

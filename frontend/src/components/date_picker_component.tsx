@@ -26,7 +26,7 @@ export default function DatePickerComponent({classExtend, value, onChange}: Date
       year: "numeric",
     },
     theme: {
-      background: "",
+      background: " ",
       todayBtn: "",
       clearBtn: "",
       icons: "",
@@ -36,12 +36,13 @@ export default function DatePickerComponent({classExtend, value, onChange}: Date
       inputIcon: "",
       selected: "",
     },
+    weekDays: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"],
   }
 
 
   return (
     
-      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} onChange={onChange} options={options} classNames={`${classExtend}`} />
+      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} onChange={onChange} options={options} classNames={`${classExtend} `} />
     
   )
 }

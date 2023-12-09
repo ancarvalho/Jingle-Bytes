@@ -1,3 +1,10 @@
+type IconProps = {
+  className?: string | undefined;
+  style?: React.CSSProperties | undefined;
+  children?: React.ReactNode;
+}
+
+
 const EditIcon = () => {
   return (
     <svg className="h-4 fill-black dark:fill-white " version="1.1" viewBox="0 0 44.683 44.683" xmlns="http://www.w3.org/2000/svg">
@@ -62,6 +69,42 @@ const CalendarIcon = () => {
   )
 }
 
+const ArrowRight = (props : IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      aria-hidden="true"
+      className="h-4 w-4 stroke-2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5">
+      </path>
+    </svg>
+  )
+}
+
+
+const ArrowLeft = (props : IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      
+      fill="none" viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      aria-hidden="true"
+      className="h-4 w-4 stroke-2"
+      {...props}
+      >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5">
+      </path>
+    </svg>
+  )
+}
+
+
 export {
-  EditIcon, TrashIcon, WatchIcon, CalendarIcon
+  EditIcon, TrashIcon, WatchIcon, CalendarIcon, ArrowRight, ArrowLeft
 }

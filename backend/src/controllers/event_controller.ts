@@ -126,6 +126,39 @@ const getEventById = async (req: Request, res: Response) => {
   }
 }
 
+const getEventDetail = async (req: Request, res: Response) => {
+  try {
+    const { event_id } = req.params;
+    const event = await prisma.event.findFirst({
+      where: {
+        id: {
+          equals: event_id
+        }
+      }, include: {
+        category: {
+          select: {
+            name: true
+          }
+        },
+        place: {
+          select: {
+            name: true,
+            address: true,
+            neighborhood: true,
+            city: true,
+            state: true,
+            country: true,
+          }
+        }
+      }
+    })
+    res.status(200).json({ "status": "Event Listed Successfully", "data": event })
+
+  } catch (error) {
+    res.status(500).json({ "status": "An Error Ocurred On Server", error });
+  }
+}
+
 
 const deleteEvent = async (req: Request, res: Response) => {
   try {
@@ -163,6 +196,6 @@ const updateEvent = async (req: Request, res: Response) => {
 }
 
 
-export { getEvents, getEventById, createEvent, updateEvent, deleteEvent, getEventsFiltered, getNextEvents }
+export { getEvents, getEventById, createEvent, updateEvent, deleteEvent, getEventsFiltered, getNextEvents, getEventDetail }
 
 
