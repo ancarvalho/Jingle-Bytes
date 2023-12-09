@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 import { NavigateOptions, useSearchParams } from "react-router-dom";
 import { decodeQueryParams, encodeQueryParams } from "../utils/parse_search_params";
 
-type useQueryParamsProps<T> = {
-  setFilters: React.Dispatch<React.SetStateAction<T | undefined>>
-}
+// type useQueryParamsProps<T> = {
+//   setFilters: React.Dispatch<React.SetStateAction<T | undefined>>
+// }
 
 export function useQueryParams<T extends Object>(): [T | undefined, (newQuery: T, options?: NavigateOptions) => void] {
 

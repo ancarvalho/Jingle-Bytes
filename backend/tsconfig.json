@@ -15,14 +15,18 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "outDir": "./build", 
+    "rootDir": "./src"
   },
   "include": [
     "**/*.ts",
     "**/*.tsx"
   ],
+  
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "prisma"
   ],
   "ts-node": {
     "compilerOptions": {
