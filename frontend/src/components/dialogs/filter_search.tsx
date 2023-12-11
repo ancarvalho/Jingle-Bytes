@@ -5,6 +5,7 @@ import { FilterProps } from '../../types/filter'
 import { useSearch } from '../../contexts/search_global'
 import { useGlobal } from '../../contexts/global_context'
 import { useQueryParams } from '../../contexts/use_query_params'
+import { SearchIcon } from '../../utils/icons'
 
 
 
@@ -68,7 +69,10 @@ export default function FilterSearch() {
                           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <SearchIcon />
                           </div>
-                          <input type="search" value={filters?.search} onChange={(e) => setFilters({ ...filters, search: e.target.value } as FilterProps)} className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
+                          <input 
+                            type="search" 
+                            value={filters?.search} 
+                            onChange={(e) => setFilters({ ...filters, search: e.target.value } as FilterProps)} className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquise por eventos" />
                           <button
                             type="submit"
                             // onClick={filterEvents}
@@ -118,15 +122,5 @@ export default function FilterSearch() {
   )
 }
 
-function SearchIcon() {
-  return (
-    <svg
-      className="fill-white w-5"
-      viewBox="0 0 24 24">
-      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-      </path>
-    </svg>
-  )
-}
 
 

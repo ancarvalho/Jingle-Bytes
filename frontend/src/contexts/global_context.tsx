@@ -6,13 +6,15 @@ import { Category } from "../types/category";
 import { Place } from "../types/place";
 
 type GlobalProps = {
-  children: ReactNode;  
+  children: ReactNode;
 }
 
 interface GlobalContextType {
-  categories: Category[]
+  categories: Category[];
   isLoading: boolean;
-  places: Place[]
+  places: Place[];
+  update_categories: () => void
+  update_places: () => void
 }
 
 export const GlobalContext = createContext({} as GlobalContextType);
@@ -36,16 +38,36 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
 
     ]).then(() => {
       setIsLoading(false)
-    }).catch((e) => console.error(e)) 
+    }).catch((e) => console.error(e))
 
   }, [])
+
+
+  function update_categories() {
+    setIsLoading(true)
+    httpClient.get<GenericResponse<Place[]>>("/place/all")
+      .then(({ data }) => setPlaces(data.data))
+      .catch((e) => console.error(e))
+      .then(() => setIsLoading(false))
+
+  }
+
+  function update_places() {
+    setIsLoading(true)
+    httpClient.get<GenericResponse<Place[]>>("/place/all")
+      .then(({ data }) => setPlaces(data.data))
+      .catch((e) => console.error(e))
+      .then(() => setIsLoading(false))
+  }
 
   return (
     <GlobalContext.Provider
       value={{
         places,
         categories,
-        isLoading
+        isLoading,
+        update_categories,
+        update_places,
       }}
     >
       {children}

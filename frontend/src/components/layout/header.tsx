@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
 import { routes } from "../../utils/routes"
+import SearchModal from "../search_modal"
+import { useState } from "react"
+import { SearchIcon } from "../../utils/icons"
 
 export default function HeaderComponent() {
+  const [showSearch, setShowSearch] = useState<boolean>(false)
+
   return (
     <>
       <header className="min-h-[7vh] dark:bg-slate-800 bg-slate-100 w-full h-20">
@@ -22,7 +27,10 @@ export default function HeaderComponent() {
             }
           </div>
           <div className="">
-
+            <SearchModal isOpen={showSearch} setIsOpen={setShowSearch} />
+            <button onClick={() => setShowSearch(true)}>
+              <SearchIcon />
+            </button>
           </div>
         </nav>
 

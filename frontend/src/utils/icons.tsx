@@ -5,14 +5,14 @@ type IconProps = {
 }
 
 
-const EditIcon = (props : IconProps) => {
+const EditIcon = (props: IconProps) => {
   return (
-    <svg 
-    className="h-4 fill-black dark:fill-white " 
-    version="1.1" 
-    viewBox="0 0 44.683 44.683" 
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
+    <svg
+      className="h-4 fill-black dark:fill-white "
+      version="1.1"
+      viewBox="0 0 44.683 44.683"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <g transform="translate(-75.829 -88.777)">
         <path d="m76.474 132.81c-0.35719-0.35718-0.64721-0.80367-0.6445-0.99218 0.01412-0.98113 2.4685-10.05 3.0281-11.189 0.50576-1.0292 3.9749-4.6414 15.544-16.185 14.359-14.328 14.944-14.875 16.33-15.28 3.0064-0.87815 5.5194-0.28549 7.5964 1.7915 2.077 2.077 2.6697 4.59 1.7915 7.5964-0.40473 1.3856-0.9521 1.9706-15.28 16.33-11.543 11.569-15.156 15.038-16.185 15.544-1.1387 0.55959-10.208 3.014-11.189 3.0281-0.18852 3e-3 -0.635-0.28731-0.99219-0.6445zm7.1078-4.5279c1.4816-0.37368 3.17-0.96134 3.7521-1.3059 0.58208-0.34458 6.0583-5.6347 12.169-11.756l11.111-11.129-5.4216-5.4216-11.129 11.111c-6.1211 6.1111-11.411 11.587-11.756 12.169-0.52871 0.89312-1.9853 5.8299-1.9853 6.7287 0 0.39615 0.22427 0.36886 3.2593-0.39663zm31.314-28.491c1.6635-1.712 1.9398-2.2374 1.9385-3.6868-1e-3 -1.3793-0.73335-2.6805-1.8263-3.2457-0.92559-0.47864-2.7211-0.53675-3.548-0.11482-0.75281 0.38414-3.356 2.9152-3.356 3.263 0 0.35765 4.8062 5.1734 5.1632 5.1734 0.15336 0 0.88621-0.62508 1.6286-1.3891z" />
@@ -20,14 +20,14 @@ const EditIcon = (props : IconProps) => {
     </svg>)
 }
 
-const TrashIcon = (props : IconProps) => {
+const TrashIcon = (props: IconProps) => {
   return (
-    <svg 
-    className="h-4 fill-red-700" 
-    version="1.1" 
-    viewBox="0 0 70.289 78.893" 
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
+    <svg
+      className="h-4 fill-red-700"
+      version="1.1"
+      viewBox="0 0 70.289 78.893"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <g transform="translate(-65.873 -76.325)">
         <g transform="matrix(.15414 0 0 .15414 65.873 76.325)">
@@ -52,7 +52,7 @@ const WatchIcon = () => {
 }
 
 
-const CalendarIcon = (props : IconProps) => {
+const CalendarIcon = (props: IconProps) => {
   return (
     <svg
       className="fill-black dark:fill-white h-7"
@@ -60,7 +60,7 @@ const CalendarIcon = (props : IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       {...props}
-      >
+    >
       <g>
         <g>
           <g>
@@ -83,7 +83,7 @@ const CalendarIcon = (props : IconProps) => {
   )
 }
 
-const ArrowRight = (props : IconProps) => {
+const ArrowRight = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const ArrowRight = (props : IconProps) => {
       aria-hidden="true"
       className="h-4 w-4 stroke-2"
       {...props}
-      >
+    >
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5">
       </path>
     </svg>
@@ -102,19 +102,32 @@ const ArrowRight = (props : IconProps) => {
 }
 
 
-const ArrowLeft = (props : IconProps) => {
+const ArrowLeft = (props: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      
+
       fill="none" viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
       aria-hidden="true"
       className="h-4 w-4 stroke-2"
       {...props}
-      >
+    >
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5">
+      </path>
+    </svg>
+  )
+}
+
+function SearchIcon(props: IconProps) {
+  return (
+    <svg
+      className="fill-white w-5"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
       </path>
     </svg>
   )
@@ -122,5 +135,5 @@ const ArrowLeft = (props : IconProps) => {
 
 
 export {
-  EditIcon, TrashIcon, WatchIcon, CalendarIcon, ArrowRight, ArrowLeft
+  EditIcon, TrashIcon, WatchIcon, CalendarIcon, ArrowRight, ArrowLeft, SearchIcon
 }
