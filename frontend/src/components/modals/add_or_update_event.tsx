@@ -6,16 +6,14 @@ import { httpClient } from '../../client/axios'
 import { useGlobal } from '../../contexts/global_context'
 import { useSearch } from '../../contexts/search_global'
 
-type AddOrUpdateDialogProps = {
-  event: Event | undefined,
+type AddOrUpdateEventModalProps = {
+  event?: Event | undefined,
   isOpen: boolean,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-  // categories: Category[],
-  // places: Place[]
 }
 
 
-export default function AddOrUpdateDialog({ event, isOpen, setIsOpen }: AddOrUpdateDialogProps) {
+export default function AddOrUpdateEventModal({ event, isOpen, setIsOpen }: AddOrUpdateEventModalProps) {
 
 
   const [newEvent, setEvent] = useState<Event>({ ...event } as Event);
@@ -23,8 +21,9 @@ export default function AddOrUpdateDialog({ event, isOpen, setIsOpen }: AddOrUpd
   const { load } = useSearch()
 
 
-  function handle_update_event() {
-    console.log(`event ${JSON.stringify(newEvent)}} deleted`)
+  function handle_event(e: React.FormEvent) {
+    e.preventDefault()
+    // console.log(`event ${JSON.stringify(newEvent)}} deleted`)
     if (newEvent.id) {
       update_event(newEvent)
 
@@ -33,6 +32,7 @@ export default function AddOrUpdateDialog({ event, isOpen, setIsOpen }: AddOrUpd
 
     }
     load()
+    closeModal()
   }
 
 
@@ -82,7 +82,7 @@ export default function AddOrUpdateDialog({ event, isOpen, setIsOpen }: AddOrUpd
                     Atualizar Evento
                   </Dialog.Title>
                   <div className="w-full max-w-xs">
-                    <form className="rounded px-8 pt-6 pb-8 mb-4">
+                    <form onSubmit={handle_event} className="rounded px-8 pt-6 pb-8 mb-4">
                       <div className="pb-4">
                         <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2" htmlFor="name">
                           Nome
@@ -131,12 +131,9 @@ export default function AddOrUpdateDialog({ event, isOpen, setIsOpen }: AddOrUpd
                     </div>
                     <div className="mt-4">
                       <button
-                        type="button"
+                        type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={() => {
-                          handle_update_event()
-                          closeModal()
-                        }}
+                        // onClick={handle_event}
                       >
                         Salvar
                       </button>

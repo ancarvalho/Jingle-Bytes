@@ -8,25 +8,12 @@ export default function App() {
   return (
 
     // <AuthProvider>
-  
-      <Layout >
-        <Routes>
-          {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={l.element()} />)}
-          {/* <Route  path={routes.home.route} element={routes.home.element()} />
-          <Route  path={routes.events.route} element={routes.events.element()} />
-          <Route  path={routes.manage_events.route} element={routes.manage_events.element()} /> */}
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          {/* <Route
-          path="/protected"
-          element={
-            <RequireAuth>
-              <ProtectedPage />
-            </RequireAuth>
-          }
-        /> */}
-          {/* </Route> */}
-        </Routes>
-      </Layout>
+
+    <Layout >
+      <Routes>
+        {Object.values(routes).map((l) => <Route key={l.route} path={l.route} element={<l.element />} />)}
+      </Routes>
+    </Layout>
 
   );
   {/* </AuthProvider> */ }

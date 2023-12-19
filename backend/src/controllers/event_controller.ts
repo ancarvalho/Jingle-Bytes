@@ -87,13 +87,13 @@ const getEventsFiltered = async (req: Request, res: Response) => {
           OR: [
             {
               name: {
-                contains: searchParsed
+                contains: searchParsed, mode: "insensitive"
               },
             },
             {
 
               description: {
-                contains: searchParsed
+                contains: searchParsed, mode: "insensitive"
               },
             }
           ]

@@ -4,25 +4,28 @@ import { httpClient } from '../../client/axios'
 import { useGlobal } from '../../contexts/global_context'
 import { Category } from '../../types/category'
 
-type CreateCategoryProps = {
+type CreateOrUpdateCategoryProps = {
+  category?: Category | undefined,
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
-export default function CreateCategory({ isOpen, setIsOpen }: CreateCategoryProps) {
+export default function CreateOrUpdateCategory({ isOpen, setIsOpen, category }: CreateOrUpdateCategoryProps) {
 
 
-  const [newCategory, setCategory] = useState<Category>({} as Category);
+
+  const [newCategory, setCategory] = useState<Category>({...category} as Category);
   const { update_categories } = useGlobal()
 
 
 
-  async function create_category(category: Category) {
+  async function create_category(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     try {
-
-      await httpClient.post("/category", { ...category })
+      await httpClient.post("/category", { ...newCategory })
       update_categories()
+      closeModal()
     } catch (error) {
       console.error(error)
     }
@@ -66,10 +69,10 @@ export default function CreateCategory({ isOpen, setIsOpen }: CreateCategoryProp
                   <Dialog.Title
                     className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                   >
-                    Atualizar Evento
+                    Criar Categoria
                   </Dialog.Title>
-                  <div className="w-full max-w-xs">
-                    <form className="rounded px-8 pt-6 pb-8 mb-4">
+                  <form onSubmit={create_category} className="rounded px-8 pt-6 pb-8 mb-4">
+                    <div className="w-full max-w-xs">
                       <div className="pb-4">
                         <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2" htmlFor="name">
                           Nome
@@ -79,35 +82,34 @@ export default function CreateCategory({ isOpen, setIsOpen }: CreateCategoryProp
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                           id="name"
                           type="text"
-                          placeholder="Nome" />
+                          placeholder="Nome"
+                          required
+                        />
                       </div>
 
 
-                    </form>
-                  </div>
-                  <div className="flex justify-between w-full">
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={closeModal}
-                      >
-                        Cancelar
-                      </button>
+
                     </div>
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={() => {
-                          create_category(newCategory)
-                          closeModal()
-                        }}
-                      >
-                        Salvar
-                      </button>
+                    <div className="flex justify-between w-full">
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                      <div className="mt-4">
+                        <button
+                          type="submit"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        >
+                          Salvar
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

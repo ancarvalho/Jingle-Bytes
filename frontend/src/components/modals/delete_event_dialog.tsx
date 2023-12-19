@@ -1,24 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { httpClient } from '../../client/axios'
-import { useSearch } from '../../contexts/search_global'
 
 type DeleteDialogProps = {
-  id: string,
-  isOpen: boolean,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  // id: string;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handle_delete: () => void;
 }
 
 
-export default function DeleteDialog({ id, isOpen, setIsOpen }: DeleteDialogProps) {
-
-  const { load } = useSearch()
+export default function DeleteDialog({ isOpen, setIsOpen, handle_delete }: DeleteDialogProps) {
 
 
-  async function handle_delete_event(id: string) {
-    await httpClient.delete("/event/" + id)
-    load()
-  }
+
 
   function closeModal() {
     setIsOpen(false)
@@ -77,10 +71,7 @@ export default function DeleteDialog({ id, isOpen, setIsOpen }: DeleteDialogProp
                       <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={() => {
-                          handle_delete_event(id)
-                          closeModal()
-                        }}
+                        onClick={handle_delete}
                       >
                         Confirmar
                       </button>

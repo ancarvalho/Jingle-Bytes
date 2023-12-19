@@ -42,7 +42,7 @@ export default function DatePickerComponent({classExtend, value, onChange}: Date
 
   return (
     
-      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} onChange={onChange} options={options} classNames={`${classExtend} `} />
+      <DatePicker show={showDate} setShow={(state) => setShowDate(state)} value={value} onChange={onChange} options={options} classNames="" />
     
   )
 }

@@ -4,28 +4,29 @@ import { httpClient } from '../../client/axios'
 import { useGlobal } from '../../contexts/global_context'
 import { Place } from '../../types/place'
 
-type CreatePlaceProps = {
+type CreateOrUpdatePlaceProps = {
 
   isOpen: boolean,
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  place: Place | undefined
   // categories: Category[],
   // places: Place[]
 }
 
 
-export default function CreatePlace({ isOpen, setIsOpen }: CreatePlaceProps) {
+export default function CreateOrUpdatePlace({ place, isOpen, setIsOpen }: CreateOrUpdatePlaceProps) {
 
-
-  const [newPlace, setPlace] = useState<Place>({} as Place);
+  const [newPlace, setPlace] = useState<Place>({...place} as Place);
   const { update_places } = useGlobal()
 
 
 
-  async function create_place(place: Place) {
+  async function create_place(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     try {
-
-      await httpClient.post("/place", { ...place })
+      await httpClient.post("/place", { ...newPlace })
       update_places()
+      closeModal()
     } catch (error) {
       console.error(error)
     }
@@ -69,10 +70,10 @@ export default function CreatePlace({ isOpen, setIsOpen }: CreatePlaceProps) {
                   <Dialog.Title
                     className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                   >
-                    Atualizar Evento
+                    Criar Local
                   </Dialog.Title>
-                  <div className="w-full max-w-xs">
-                    <form className="rounded px-8 pt-6 pb-8 mb-4">
+                  <form onSubmit={create_place} className="rounded px-8 pt-6 pb-8 mb-4">
+                    <div className="w-full max-w-xs">
                       <div className="pb-4">
                         <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2" htmlFor="name">
                           Nome
@@ -147,31 +148,29 @@ export default function CreatePlace({ isOpen, setIsOpen }: CreatePlaceProps) {
                       </div>
 
 
-                    </form>
-                  </div>
-                  <div className="flex justify-between w-full">
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={closeModal}
-                      >
-                        Cancelar
-                      </button>
+
                     </div>
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={() => {
-                          create_place(newPlace)
-                          closeModal()
-                        }}
-                      >
-                        Salvar
-                      </button>
+                    <div className="flex justify-between w-full">
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                      <div className="mt-4">
+                        <button
+                          type="submit"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+
+                        >
+                          Salvar
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

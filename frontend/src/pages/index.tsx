@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import EventCard from "../components/event_card"
+import EventCard from "../components/cards/event_card"
 import { Event } from "../types/event"
 import { routes } from "../utils/routes"
 import { useEffect, useState } from "react"
@@ -16,13 +16,10 @@ export default function Home() {
 
 	useEffect(() => {
 		setIsLoading(true)
-
 		httpClient.get<GenericResponse<Event[]>>("/event/next")
-			.then(({ data }) => {
-				setEvents(transformEvents(data.data))
-				setIsLoading(false)
-			})
+			.then(({ data }) => setEvents(transformEvents(data.data)))
 			.catch((e) => console.error(e))
+			.then(() => setIsLoading(false))
 
 	}, [])
 
@@ -30,7 +27,7 @@ export default function Home() {
 	return (
 		<div className="min-h-[88vh] dark:bg-slate-700 bg-[rgb(215,215,215)]">
 			<section className="">
-				<div className="relative bg-[url('assets/background.jpg')] bg-no-repeat bg-cover bg-center h-[300px] bg-opacity-90 " >
+				<div className="relative bg-[url('/background.jpg')] bg-no-repeat bg-cover bg-center h-[300px] bg-opacity-90 " >
 					<div className="absolute bottom-0 left-0">
 						<p className="pl-2 text-2xl font-bold dark:bg-opacity-90 bg-opacity-70 bg-slate-300 dark:bg-slate-700 dark:text-white">
 							Os Eventos mais esperados do ano
@@ -56,7 +53,7 @@ export default function Home() {
 				</div>
 
 				<div className="flex flex-wrap justify-center gap-2 p-2 ">
-					{isLoading ? <>Loading...</> : events.map((e) => <EventCard key={e.id} {...e} />)}
+					{isLoading ? <>Loading...</> : events.map((e) => <EventCard key={e.id} event={e} />)}
 					{/* {events.map((e) => <EventCard key={e.id} {...e} />)} */}
 				</div>
 

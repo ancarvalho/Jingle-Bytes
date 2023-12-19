@@ -14,7 +14,7 @@ export default function HeaderComponent() {
           <LogoSvg />
           <div className="flex gap-3">
             {
-              Object.values(routes).map((l) =>
+              Object.values(routes).filter((e) => e.hidden === false).map((l) =>
               (
                 <Link to={l.route} key={l.route}>
 

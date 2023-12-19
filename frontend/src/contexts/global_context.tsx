@@ -34,19 +34,16 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
     Promise.all([
       httpClient.get<GenericResponse<Category[]>>("/category/all").then(({ data }) => setCategories(data.data)),
       httpClient.get<GenericResponse<Place[]>>("/place/all").then(({ data }) => setPlaces(data.data)),
-
-
     ]).then(() => {
       setIsLoading(false)
     }).catch((e) => console.error(e))
-
   }, [])
 
 
   function update_categories() {
     setIsLoading(true)
-    httpClient.get<GenericResponse<Place[]>>("/place/all")
-      .then(({ data }) => setPlaces(data.data))
+    httpClient.get<GenericResponse<Category[]>>("/category/all")
+      .then(({ data }) => setCategories(data.data))
       .catch((e) => console.error(e))
       .then(() => setIsLoading(false))
 
@@ -59,6 +56,7 @@ export const GlobalContextProvider = ({ children }: GlobalProps) => {
       .catch((e) => console.error(e))
       .then(() => setIsLoading(false))
   }
+
 
   return (
     <GlobalContext.Provider

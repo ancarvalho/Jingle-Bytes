@@ -1,13 +1,13 @@
 
-import FilterSearch from "../../components/dialogs/filter_search"
-import EventCard from "../../components/event_card"
+import FilterSearch from "../../components/modals/filter_search"
+import EventCard from "../../components/cards/event_card"
 
 
 import { useSearch } from "../../contexts/search_global"
 
 export default function Events() {
-	
-  const {events, isLoading} = useSearch()
+
+  const { events, isLoading } = useSearch()
 
   return (
     <div className="min-h-[88vh] flex flex-col items-center bg-[rgb(215,215,215)] dark:bg-slate-700">
@@ -16,16 +16,12 @@ export default function Events() {
       </div>
 
       <div className="">
-        <FilterSearch/>
+        <FilterSearch />
         <div className="flex flex-wrap justify-center gap-2 p-2">
 
           {
-            isLoading ? <>Loading</> : events.map((e) => <EventCard key={e.id} {...e} />)
+            isLoading ? <>Loading</> : events.map((e) => <EventCard key={e.id} event={e} />)
           }
-
-          {/* {events.map((e) => <EventCard key={e.id} {...e} />)} */}
-
-          {/* <EventCard {...newEvent} /> */}
 
         </div>
       </div>

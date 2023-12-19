@@ -35,10 +35,10 @@ export const SearchContextProvider = ({ children }: SearchProps) => {
 
 
 
-	function filterEvents() {
+	async function filterEvents() {
 		if (filters) {
 			setIsLoading(true)
-			httpClient
+			await httpClient
 				.get<GenericResponse<Event[]>>("/event/find?" + encodeQueryParamsToRequest(filters))
 				.then(({ data }) => setEvents(transformEvents(data.data)))
 				.then(() => setIsLoading(false))
@@ -46,9 +46,9 @@ export const SearchContextProvider = ({ children }: SearchProps) => {
 		}
 	}
 
-	function getAllEvents() {
+	async function getAllEvents() {
 		setIsLoading(true)
-		httpClient.get<GenericResponse<Event[]>>("/event/all")
+		await httpClient.get<GenericResponse<Event[]>>("/event/all")
 			.then(({ data }) => setEvents(transformEvents(data.data)))
 			.then(() => setIsLoading(false))
 			.catch((e) => console.error(e))
