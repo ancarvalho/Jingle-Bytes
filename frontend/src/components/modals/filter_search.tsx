@@ -1,28 +1,30 @@
 import { Popover, Transition } from '@headlessui/react'
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import DatePickerComponent from '../date_picker_component'
 import { FilterProps } from '../../types/filter'
 import { useSearch } from '../../contexts/search_global'
 import { useGlobal } from '../../contexts/global_context'
-import { useQueryParams } from '../../contexts/use_query_params'
 import { SearchIcon } from '../../utils/icons'
 
 
 
 export default function FilterSearch() {
 
-  const { setFiltersParams } = useSearch();
-  const [filters, setFilters] = useQueryParams<FilterProps>()
-  const { categories, places } = useGlobal()
+  const { categories, places } = useGlobal()  
+  const {  setFiltersParams, nFilters } = useSearch();
+  const [filters, setFilters] = useState<FilterProps | undefined>(nFilters)
 
-  // console.log(JSON.stringify(filters))
 
-  // setFiltersParams(filters)
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (filters) {
       setFiltersParams(filters)
     }
+  }
+
+  function clearSearch() {
+    setFiltersParams()
+    setFilters(undefined)
   }
 
   useEffect(() => {
@@ -57,6 +59,7 @@ export default function FilterSearch() {
               <Popover.Panel className="absolute right-[88%] z-10 w-screen max-w-sm -translate-y-[120%] transform px-4 sm:px-0 ">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5 bg-slate-200 dark:bg-slate-500">
                   <div className="relative flex flex-col gap-2 p-2">
+                    
                     <form
                       onSubmit={handleSearch}
                     >
@@ -110,6 +113,9 @@ export default function FilterSearch() {
 
 
                     </form>
+                    <button type="button" className="" onClick={clearSearch}>
+                      clear
+                    </button>
                   </div>
 
                 </div>

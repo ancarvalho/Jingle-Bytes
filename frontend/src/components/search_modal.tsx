@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { routes } from '../utils/routes'
 import { SearchIcon } from '../utils/icons'
+import { useSearch } from '../contexts/search_global'
+import { FilterProps } from '../types/filter'
 
 type SearchModalProps = {
   isOpen: boolean,
@@ -13,13 +15,17 @@ type SearchModalProps = {
 
 export default function SearchModal({ isOpen, setIsOpen }: SearchModalProps) {
 
-  const [query, setQuery] = useState<string>("")
+  const [query, setQuery] = useState<string | undefined>("")
   const navigate = useNavigate()
+  const { setFiltersParams } = useSearch()
 
   async function handle_search(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    navigate(routes.events.route + "/?search=" + query)
-    closeModal()
+    if (query) {
+      setFiltersParams({ search: query } as FilterProps)
+      navigate(routes.events.route)
+      closeModal()
+    }
   }
 
   function closeModal() {
@@ -61,7 +67,7 @@ export default function SearchModal({ isOpen, setIsOpen }: SearchModalProps) {
                         type="search"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Pesquise por eventos" />
                       <button
                         type="submit"

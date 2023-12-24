@@ -10,29 +10,27 @@ import { Event } from "../types/event";
 
 type SearchProps = {
 	children: ReactNode;
-	// filters?: FilterProps | undefined;
+	mountQueryParams : [filters: FilterProps | undefined, setFiltersParams: (newQuery?: FilterProps) => void]
 }
 
 interface SearchContextType {
 	events: Event[];
-	// filters: FilterProps | undefined;
+	nFilters: FilterProps | undefined;
 	load: () => void
-	setFiltersParams: React.Dispatch<React.SetStateAction<FilterProps | undefined>>;
+	setFiltersParams: (newValue?: FilterProps) => void
 	filterEvents: () => void;
 	isLoading: boolean;
-
 }
 
 export const SearchContext = createContext({} as SearchContextType);
 
 
 
-export const SearchContextProvider = ({ children }: SearchProps) => {
+export const SearchContextProvider = ({ children, mountQueryParams }: SearchProps) => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [filters, setFiltersParams] = useState<FilterProps | undefined>()
 	const [events, setEvents] = useState<Event[]>([] as Event[])
-
+	const [filters, setFiltersParams] = mountQueryParams;
 
 
 	async function filterEvents() {
@@ -56,24 +54,21 @@ export const SearchContextProvider = ({ children }: SearchProps) => {
 
 
 	function load() {
+		console.log("loading")
 		if (filters) {
-			// console.log("filtered")
 			filterEvents()
 		} else {
 			getAllEvents()
-			// console.log("notFilterd")
 		}
 	}
 
-
 	useEffect(load, [filters])
 
-	// console.log(filters)
 
 	return (
 		<SearchContext.Provider
 			value={{
-				// filters,
+				nFilters: filters,
 				setFiltersParams,
 				load,
 				events,
